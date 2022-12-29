@@ -1,0 +1,22 @@
+{
+  "name": "projeto8",
+  "version": "1.0.0",
+  "description": "Aplicação web  com admin integrado",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maria Luisa Ribeiro Maia",
+  "license": "MIT",
+  "dependencies": {
+    "@adminjs/express": "^5.0.1",
+    "@adminjs/mongoose": "^3.0.1",
+    "@adminjs/sequelize": "^3.0.0",
+    "adminjs": "^6.7.2",
+    "express": "^4.18.2",
+    "express-mysql-session": "^2.1.8",
+    "mongoose": "^6.8.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.28.0"
+  }
+}
