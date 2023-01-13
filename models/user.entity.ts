@@ -50,10 +50,10 @@ User.init(
       },
       role_id: {
         type: new DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'roles',
-            key: 'id'
+            allowNull: false,
+            references: {
+                model: 'roles',
+                key: 'id'
         }
       },
       createdAt: {
@@ -65,7 +65,7 @@ User.init(
     },
     {
       sequelize,
-      tableName: 'user',
+      tableName: 'users',
       modelName: 'user',
     }
   )
