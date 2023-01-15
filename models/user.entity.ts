@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model, Optional, CreationOptional } from 'sequelize'
 import { sequelizeDb as sequelize } from '../db';
 
 interface IUser {
@@ -7,6 +7,8 @@ interface IUser {
     username: string;
     email: string;
     password: string;
+    token: string;
+    active: boolean;
     role_id: number;
     createdAt: Date;
     updatedAt: Date;
@@ -14,58 +16,69 @@ interface IUser {
 
 export type UserCreationAttributes = Optional<IUser, 'id'>
 
-export class User extends Model<IUser, UserCreationAttributes>{
-    declare id: number;
-    declare name: string;
-    declare username: string;
-    declare email: string;
-    declare password: string;
-    declare role_id: number;
-    declare createdAt: Date;
-    declare updatedAt: Date;
+export class User extends Model<IUser, UserCreationAttributes> {
+    declare id: CreationOptional<number>;
+    declare name: string | null;
+    declare username: string | null;
+    declare email: string | null;
+    declare password: string | null;
+    declare token: string | null;
+    declare active: boolean | null;
+    declare role_id: number | null;
+    declare createdAt: Date | null;
+    declare updatedAt: Date | null;
 }
 
 User.init(
     {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      name: {
-        type: new DataTypes.STRING(40),
-        allowNull: false,
-      },
-      username: {
-        type: new DataTypes.STRING(40),
-        allowNull: false,
-      },
-      email: {
-        type: new DataTypes.STRING(255),
-        allowNull: false,
-      },
-      password: {
-        type: new DataTypes.STRING(255),
-        allowNull: false,
-      },
-      role_id: {
-        type: new DataTypes.INTEGER,
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        name: {
+            type: new DataTypes.STRING(255),
+            allowNull: false,
+        },
+        username: {
+            type: new DataTypes.STRING(255),
+            allowNull: false,
+        },
+        email: {
+            type: new DataTypes.STRING(255),
+            allowNull: false,
+        },
+        password: {
+            type: new DataTypes.STRING(255),
+            allowNull: false,
+        },
+        token: {
+            type: new DataTypes.STRING(255),
+            allowNull: true,
+        },
+        active: {
+            type: new DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false
+        },
+        role_id: {
+            type: new DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'roles',
                 key: 'id'
-        }
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-      },
+            }
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+        },
     },
     {
-      sequelize,
-      tableName: 'users',
-      modelName: 'user',
+        sequelize,
+        tableName: 'users',
+        modelName: 'user',
     }
-  )
+)
